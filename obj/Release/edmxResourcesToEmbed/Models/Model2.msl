@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище GENERALModel1Container" CdmEntityContainer="GENERALEntities1">
+    <EntitySetMapping Name="C_get_ok_days777">
+      <EntityTypeMapping TypeName="GENERALModel1.C_get_ok_days777">
+        <MappingFragment StoreEntitySet="_get_ok_days777">
+          <ScalarProperty Name="fio" ColumnName="fio" />
+          <ScalarProperty Name="datbegin" ColumnName="datbegin" />
+          <ScalarProperty Name="dday" ColumnName="dday" />
+          <ScalarProperty Name="dmonth" ColumnName="dmonth" />
+          <ScalarProperty Name="doljn" ColumnName="doljn" />
+          <ScalarProperty Name="kod" ColumnName="kod" />
+          <ScalarProperty Name="podr" ColumnName="podr" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

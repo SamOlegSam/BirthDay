@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="grad">
+
+    <style>
+        .grad {
+            background-image: url(/Images/fon_73.jpg);
+        }
+    </style>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Дни рождения сотрудников ОАО Гомельтранснефть Дружба</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="~/Scripts/birthday.js"></script>
+
+    @*-------------------------------------------------------------------------------------------------*@
+<script type="text/javascript">
+<!--
+    // Количество воздушных шариков (не ставьте слишком много - может затормозить браузер)
+    var ballmax = 20;
+
+    // Разность скорости слоев (рекомендуется от 0.3 до 2)
+    var sinkspeed = 0.6;
+
+    // Максимальный размер воздушных шариков (пиксели)
+    var ballmaxsize = 40;
+
+    // Минимальный размер воздушных шариков (пиксели)
+    var ballminsize = 10;
+
+    // Скорость полета воздушных шариков (мс)
+    var ballspeed = 20;
+
+    // Зона подъема воздушных шариков
+    // 1 - подъем воздушных шариков на всем пространстве
+    // 2 - подъем воздушных шариков в левой части
+    // 3 - подъем воздушных шариков по центру
+    // 4 - подъем воздушных шариков в правой части
+    // больше или равно 100 - подъем воздушных шариков по краям.
+    // Указанное число освободит место в пикселях от воздушных шариков в пикселях по-центру
+    var ballingzone = 1;
+
+    // Пошатывание воздушнвх шариков влево-вправо
+    // true - пошатываться
+    // false - не пошатываться
+    var ballreverb = true;
+
+    var i = 0;
+    grphcs = new Array();
+
+    // Список ссылок к картинкам воздушных шариков
+    grphcs[i++] = 'Images/balloon01.gif';
+    grphcs[i++] = 'Images/balloon02.gif';
+    grphcs[i++] = 'Images/balloon03.gif';
+    grphcs[i++] = 'Images/balloon04.gif';
+    grphcs[i++] = 'Images/balloon05.gif';
+    grphcs[i++] = 'Images/balloon06.gif';
+    grphcs[i++] = 'Images/balloon07.gif';
+    grphcs[i++] = 'Images/balloon08.gif';
+
+
+    // Не редактировать ничего ниже этой линии
+    var ball = new Array();
+    var marginbottom;
+    var marginright;
+    var timer;
+    var i_ball = 0;
+    var x_mv = new Array();
+    var crds = new Array();
+    var lftrght = new Array();
+    var browserinfos = navigator.userAgent;
+    var ie5 = document.all && document.getElementById && !browserinfos.match(/Opera/);
+    var ns6 = document.getElementById && !document.all;
+    var opera = browserinfos.match(/Opera/);
+    var browserok = ie5 || ns6 || opera;
+
+    function randommaker(range) {
+        rand = Math.floor(range * Math.random());
+        return rand;
+    }
+
+    function randoms(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    };
+
+    function preloadimages(img) {
+        image = new Image();
+        for (var i = 0; i < img.length; i++) image.src = img[i];
+    }
+
+    function getBallXPos(oball) {
+        if (ballingzone == 1) { return randommaker(marginright - oball.size) }
+        if (ballingzone == 2) { return randommaker(marginright / 2 - oball.size) }
+        if (ballingzone == 3) { return randommaker(marginright / 2 - oball.size) + marginright / 4 }
+        if (ballingzone == 4) { return randommaker(marginright / 2 - oball.size) + marginright / 2 }
+        if (ballingzone >= 100) { return (randoms(0, 1) == 0) ? ((randommaker(marginright / 2 - oball.size)) - ballingzone / 2) : ((randommaker(marginright / 2 - oball.size) + marginright / 2) + ballingzone / 2); }
+        return 0;
+    }
+
+    function initball() {
+        if (ie5 || opera) {
+            marginbottom = document.body.scrollHeight;
+            marginright = document.body.clientWidth - 15;
+        }
+        else if (ns6) {
+            marginbottom = document.body.scrollHeight;
+            marginright = window.innerWidth - 15;
+        }
+        var ballsizerange = ballmaxsize - ballminsize;
+        for (var i = 0; i <= ballmax; i++) {
+            crds[i] = 0;
+            lftrght[i] = Math.random() * 15;
+            x_mv[i] = 0.03 + Math.random() / 10;
+            ball[i] = document.getElementById('s' + i);
+            ball[i].onclick = function () {
+                this.posx = getBallXPos(this);
+                this.posy = marginbottom - 2 * this.size
+            }
+            ball[i].size = randommaker(ballsizerange) + ballminsize;
+            ball[i].style.width = ball[i].size + 'px';
+            ball[i].style.height = ball[i].size + 'px';
+            ball[i].style.zIndex = 100 + ball[i].size;
+            ball[i].sink = sinkspeed * ball[i].size / 5;
+
+            ball[i].posx = getBallXPos(ball[i]);
+            ball[i].posy = randommaker(2 * marginbottom - marginbottom - 2 * ball[i].size);
+            ball[i].style.left = ball[i].posx + 'px';
+            ball[i].style.top = ball[i].posy + 'px';
+        }
+        moveball();
+    }
+
+    function moveball() {
+        for (var i = 0; i <= ballmax; i++) {
+            crds[i] += x_mv[i];
+            ball[i].posy -= ball[i].sink;
+            ball[i].style.left = (ballreverb) ? (ball[i].posx + lftrght[i] * Math.sin(crds[i]) + 'px') : (ball[i].posx + lftrght[i] + 'px');
+            ball[i].style.top = ball[i].posy + 'px';
+            if (ball[i].posy < -ballmaxsize || parseInt(ball[i].style.left) > (marginright - 3 * lftrght[i])) {
+                ball[i].posx = getBallXPos(ball[i]);
+                ball[i].posy = marginbottom - 2 * ball[i].size
+            }
+        }
+        var timer = setTimeout('moveball()', ballspeed)
+    }
+
+    preloadimages(grphcs);
+
+    for (var i = 0; i <= ballmax; i++) {
+        imgsrc = grphcs[randoms(0, grphcs.length - 1)];
+        document.write('<img src="' + imgsrc + '" id="s' + i + '" style="position:absolute;top:-' + ballmaxsize + '">');
+    }
+
+    if (browserok) {
+        window.onload = initball;
+    }
+//-->
+</script>
+    @*-------------------------------------------------------------------------------------------------*@
+</body>
+</html>

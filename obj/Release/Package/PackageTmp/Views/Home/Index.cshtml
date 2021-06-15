@@ -1,0 +1,260 @@
+﻿@model IEnumerable<BirthDay.Models.C_get_ok_days777>
+
+    <style>
+
+        .loader {
+            overflow: hidden;
+            font-size: 5px;
+            margin: 50px auto;
+            text-indent: -9999em;
+            width: 8em;
+            height: 8em;
+            border-radius: 50%;
+            background: #ffaa00;
+            background: -moz-linear-gradient(left, #ffaa00 10%, rgba(101,171,248, 0) 42%);
+            background: -webkit-linear-gradient(left, #ffaa00 10%, rgba(101,171,248, 0) 42%);
+            background: -o-linear-gradient(left, #ffaa00 10%, rgba(101,171,248, 0) 42%);
+            background: -ms-linear-gradient(left, #ffaa00 10%, rgba(101,171,248, 0) 42%);
+            background: linear-gradient(to right, #ffaa00 10%, rgba(101,171,248, 0) 42%);
+            position: relative;
+            -webkit-animation: load3 1.4s infinite linear;
+            animation: load3 1.4s infinite linear;
+            -webkit-transform: translateZ(0);
+            -ms-transform: translateZ(0);
+            transform: translateZ(0);
+        }
+
+            .loader:before {
+                width: 50%;
+                height: 50%;
+                background: #ffaa00;
+                border-radius: 100% 0 0 0;
+                position: absolute;
+                top: 0;
+                left: 0;
+                content: '';
+            }
+
+            .loader:after {
+                background: white;
+                width: 75%;
+                height: 75%;
+                border-radius: 50%;
+                content: '';
+                margin: auto;
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+            }
+
+        @@-webkit-keyframes load3 {
+            0% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @@keyframes load3 {
+            0% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
+<h2><center>ДНИ РОЖДЕНИЯ СОТРУДНИКОВ ОАО ГОМЕЛЬТРАНСНЕФТЬ ДРУЖБА</center></h2>
+
+
+@*----------------------------------------------------------*@
+<hr>
+<table align="center">
+    <tr>
+        <td colspan="4" align="center">
+            <center><label>Поиск сотрудника</label></center>
+        </td>
+
+        <td></td>
+        <td colspan="6" align="center">
+            
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input class="form-control btn-block" id="SearchName" />
+        </td>
+        <td>
+            &nbsp;
+        </td>
+        <td>
+            <button type="submit" class="btn btn-warning" onclick="GetLastName()">Найти</button>
+        </td>
+        <td>
+            &nbsp;&nbsp;&nbsp;
+        </td>
+        <td>
+            &nbsp;&nbsp;&nbsp;
+        </td>
+        <td>
+            
+        </td>
+        <td>
+            &nbsp;
+        </td>
+        <td>
+            
+        </td>
+        <td>
+            &nbsp;
+        </td>
+        <td>
+            
+        </td>
+    </tr>
+</table>
+
+
+<center>
+    <div class="loader" id="loadImg" style="display:none;">
+    </div>
+</center>
+<div id="search">
+</div>
+
+<hr>
+@*-------------------------------------------------*@
+<style>
+    tr {
+        font-size: 20px;
+    }
+</style>
+
+@*---------------------------------------------------------------------------------------------------------*@
+<h2 style="color:red"><center>Именинники сегодня,(@DateTime.Now.ToLongDateString())</center></h2>
+
+
+<table class="table">
+
+
+    @foreach (var item in Model)
+    {
+
+       if ((item.dday == DateTime.Now.Day) && (item.dmonth == DateTime.Now.Month))
+       // if ((item.BirdKol - item.NowKol) == 0)
+        {
+            <tr>
+
+                <td rowspan="2" style="border-bottom-left-radius:20px;border-top-left-radius:20px; border:2px; border-color:black; font-size:50px; color:red; vertical-align : middle; text-align:center;">
+                    <b>
+                        @Html.DisplayFor(modelItem => item.Aget)
+                        
+
+                    </b>
+                </td>
+
+                <td style="border-bottom-right-radius:20px;border-top-right-radius:20px; border:2px; border-color:black; font-size:30px;">
+                    <b>
+                        @Html.DisplayFor(modelItem => item.fio)
+                    </b>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.doljn)
+                </td>
+            </tr>
+            @*<tr>
+                    <td rowspan="2">
+                        @Html.DisplayFor(modelItem => item.Aget)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fio)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.doljn)
+                    </td>
+                </tr>*@
+        }
+    }
+
+
+
+</table>
+<hr>
+@*---------------------------------------------------------------------------------------------------------*@
+
+<h3><center>Именинники в ближайшие дни:</center></h3>
+<table class="table">
+
+    <tr>
+
+        <th>
+            <center>Дата</center>
+        </th>
+        <th>
+            <center>Возраст</center>
+        </th>
+        <th>
+            <center>Сотрудник</center>
+        </th>
+
+
+        <th></th>
+    </tr>
+        
+
+    
+        @foreach (var item in Model)
+        {
+            if ((item.BirdKol1 - item.NowKol) > 0 && (item.BirdKol1 - item.NowKol) < 30)
+                //if ((item.BirdKol - item.NowKol) > 0 && (item.BirdKol - item.NowKol) < 30)
+                {
+            <tr>
+                <td>
+                    @item.datbegin.ToShortDateString()
+                    
+                </td>
+                @if (item.Aget % 5 == 0)
+                {
+                    <td style="font-size:20px; color:red">
+                        <b>
+
+                            @Html.DisplayFor(modelItem => item.Aget)                            
+
+                        </b>
+                    </td>
+                }
+                else
+                {
+                    <td style="font-size:20px; ">
+                        <b>
+
+                            @Html.DisplayFor(modelItem => item.Aget)
+                            
+                        </b>
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.fio),
+                    @Html.DisplayFor(modelItem => item.doljn),
+                    @Html.DisplayFor(modelItem => item.podr)
+                </td>
+                <td>
+                </td>
+            </tr>
+            }
+        }
+</table>

@@ -1,0 +1,41 @@
+﻿@{
+    Layout = null;
+}
+@model IEnumerable<BirthDay.Models.C_get_ok_days777>
+    <table class="table">
+
+        <tr>
+
+            <th>
+                <center>Дата</center>
+            </th>
+            <th>
+                <center>Возраст</center>
+            </th>
+            <th>
+                <center>Сотрудник</center>
+            </th>
+
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+
+    <tr tr class="odd">
+        <td>
+            @item.datbegin.ToShortDateString()
+        </td>
+        <td>
+            <center>
+            @Html.DisplayFor(modelItem => item.Aget)
+            </center>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fio), @Html.DisplayFor(modelItem => item.doljn)
+        </td>
+
+    </tr>
+        }
+    </table>

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище GENERALModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "GENERAL.dbo.get_ok_days" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="get_ok_days">
+    <Key>
+      <PropertyRef Name="fio" />
+      <PropertyRef Name="tabn" />
+    </Key>
+    <Property Name="fio" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="tabn" Type="int" Nullable="false" />
+    <Property Name="datbegin" Type="datetime" />
+    <Property Name="FullPodr" Type="nvarchar" MaxLength="255" />
+    <Property Name="doljn" Type="varchar" MaxLength="255" />
+    <Property Name="id_0" Type="uniqueidentifier" />
+    <Property Name="id_1" Type="uniqueidentifier" />
+    <Property Name="id_2" Type="uniqueidentifier" />
+    <Property Name="id_3" Type="uniqueidentifier" />
+    <Property Name="id_4" Type="uniqueidentifier" />
+    <Property Name="dday" Type="int" />
+    <Property Name="dmonth" Type="int" />
+  </EntityType>
+  <EntityContainer Name="Хранилище GENERALModelContainer">
+    <EntitySet Name="get_ok_days" EntityType="Self.get_ok_days" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [get_ok_days].[fio] AS [fio], 
+    [get_ok_days].[tabn] AS [tabn], 
+    [get_ok_days].[datbegin] AS [datbegin], 
+    [get_ok_days].[FullPodr] AS [FullPodr], 
+    [get_ok_days].[doljn] AS [doljn], 
+    [get_ok_days].[id_0] AS [id_0], 
+    [get_ok_days].[id_1] AS [id_1], 
+    [get_ok_days].[id_2] AS [id_2], 
+    [get_ok_days].[id_3] AS [id_3], 
+    [get_ok_days].[id_4] AS [id_4], 
+    [get_ok_days].[dday] AS [dday], 
+    [get_ok_days].[dmonth] AS [dmonth]
+    FROM [dbo].[get_ok_days] AS [get_ok_days]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

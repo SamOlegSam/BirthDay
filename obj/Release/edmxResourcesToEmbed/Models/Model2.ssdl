@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище GENERALModel1" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "GENERAL.dbo._get_ok_days777" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="_get_ok_days777">
+    <Key>
+      <PropertyRef Name="kod" />
+      <PropertyRef Name="podr" />
+    </Key>
+    <Property Name="fio" Type="varchar" MaxLength="60" />
+    <Property Name="datbegin" Type="datetime" />
+    <Property Name="dday" Type="int" />
+    <Property Name="dmonth" Type="int" />
+    <Property Name="doljn" Type="varchar" MaxLength="255" />
+    <Property Name="kod" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="podr" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="Хранилище GENERALModel1Container">
+    <EntitySet Name="_get_ok_days777" EntityType="Self._get_ok_days777" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [_get_ok_days777].[fio] AS [fio], 
+    [_get_ok_days777].[datbegin] AS [datbegin], 
+    [_get_ok_days777].[dday] AS [dday], 
+    [_get_ok_days777].[dmonth] AS [dmonth], 
+    [_get_ok_days777].[doljn] AS [doljn], 
+    [_get_ok_days777].[kod] AS [kod], 
+    [_get_ok_days777].[podr] AS [podr]
+    FROM [dbo].[_get_ok_days777] AS [_get_ok_days777]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>
